@@ -14,6 +14,7 @@ def steer_command(command_list):
 		rospy.loginfo(angle_command)
 		pub.publish(angle_command)
 		rate.sleep()
+		# change
 
 if __name__ == '__main__':
 	try:
