@@ -16,18 +16,18 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "steer_command");
 	ros::NodeHandle n;
-	ros::Publisher command_pub = n.advertise<std_msgs::Float32>("ros_talon/steering_angle ", 100);
+	ros::Publisher command_pub = n.advertise<std_msgs::Float32>("ros_talon/steering_angle", 100);
 	ros::Rate loop_rate(1);
 	float* angleList = CommandList(); 
 	int count = 0;
 	while (ros::ok() && count < 100)
 	{
-		std::msgs::Float32 angle_des;
+		std_msgs::Float32 angle_des;
 		float angle = angleList[count];
 		angle_des.data = angle;
 		ROS_INFO("%d : %f", count, angle_des.data);
 		command_pub.publish(angle_des);
-		ros::spinonce();
+		ros::spinOnce();
 		loop_rate.sleep();
 		++count;
 	}
